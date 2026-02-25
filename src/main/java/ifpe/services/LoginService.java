@@ -21,8 +21,6 @@ public class LoginService {
         return  false;
     }
 
-
-
     public Login fazerLogin(Login login) {
         String email = login.getEmail();
         Usuario usuario = this.usuarioRepositorio.buscarPorEmail(email);

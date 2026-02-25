@@ -92,12 +92,9 @@ public class LoginTest {
     public  void realizarLoginComEmaileSenhaErrada(){
         //Arrange
         Login loginInvalido = new Login("emailErrado@email.com", "senhaErrada");
-        Usuario usuario = new Usuario();
-        usuario.setEmail("email@email.com");
-        usuario.setSenha("123456@Ff");
 
         // Act
-        when(usuarioRepositorio.buscarPorEmail(loginInvalido.getEmail())).thenReturn(usuario);
+        when(usuarioRepositorio.buscarPorEmail(loginInvalido.getEmail())).thenReturn(null);
 
         //Assert
         Assertions.assertThrows(NullPointerException.class, ()-> {
