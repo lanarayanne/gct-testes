@@ -40,7 +40,6 @@ public class LoginTest {
     public  void realizarLoginComEmailInvalido(){
         //Arrange
         Login loginInvalido = new Login("email_invalido", "123456@f");
-        when(loginRepositorio.fazerLogin(loginInvalido)).thenReturn(null);
 
         // Act
         Login loginAct = loginService.fazerLogin(loginInvalido);
