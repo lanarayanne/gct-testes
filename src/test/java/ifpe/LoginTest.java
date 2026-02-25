@@ -54,7 +54,6 @@ public class LoginTest {
 
         // Act
         when(usuarioRepositorio.buscarPorEmail(loginInvalido.getEmail())).thenReturn(null);
-        Login loginAct = loginService.fazerLogin(loginInvalido);
 
         //Assert
         Assertions.assertThrows(NullPointerException.class, ()-> {
