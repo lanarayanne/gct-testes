@@ -11,9 +11,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4 # Baixa seu código na máquina virtual
+      - uses: actions/checkout@v4
 
-      - name: Configurar JDK 17 # Mude para a versão que você usa
+      - name: Configurar JDK 17
         uses: actions/setup-java@v4
         with:
           java-version: '17'
@@ -21,4 +21,4 @@ jobs:
           cache: maven
 
       - name: Build e Testes com Maven
-        run: mvn -B test # Executa todos os testes (incluindo Mockito/JUnit)
+        run: mvn -B test
