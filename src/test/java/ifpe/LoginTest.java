@@ -3,6 +3,7 @@ package ifpe;
 import ifpe.entidades.Login;
 import ifpe.repositorios.LoginRepositorio;
 import ifpe.services.LoginService;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,8 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class LoginTest {
@@ -27,13 +27,28 @@ public class LoginTest {
     @Test
     public void realizarLoginComSucesso() {
         // Arrange
-        String email = "usuario@usuario.com";
-        String senha = "123456@f";
+        Login login = new Login("usuario@usuario.com", "123456@f");
 
         // Act
-        loginService.fazerLogin(email, senha);
+        loginService.fazerLogin(login);
 
         // Assert (Verificação)
-        verify(loginRepositorio, times(1)).fazerLogin(email, senha);
+        verify(loginRepositorio, times(1)).fazerLogin(login);
+    }
+
+    @Test
+    public  void realizarLoginComEmailInvalido(){
+        //Arrange
+        Login loginInvalido = new Login("email_invalido", "123456@f");
+        when(loginRepositorio.fazerLogin(loginInvalido)).thenReturn(null);
+
+        // Act
+        Login loginAct = loginService.fazerLogin(loginInvalido);
+
+        //Assert
+        Assertions.assertNull(loginAct, "Deve retornar null");
+        verify(loginRepositorio, times(1)).fazerLogin(loginInvalido);
+        verify(loginRepositorio, never()).fazerLogin(any(Login.class));
+
     }
 }

@@ -10,7 +10,7 @@ public class LoginService {
         this.loginRepositorio = repo;
     }
 
-    public Login fazerLogin(String email, String senha){
-        return this.loginRepositorio.fazerLogin(email, senha);
+    public Login fazerLogin(Login login){
+        return this.loginRepositorio.fazerLogin(login);
     }
 }
