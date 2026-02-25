@@ -37,9 +37,24 @@ public class LoginTest {
     }
 
     @Test
-    public  void realizarLoginComEmailInvalido(){
+    public  void realizarLoginComEmailInvalidoSemArroba(){
         //Arrange
-        Login loginInvalido = new Login("email_invalido", "123456@f");
+        Login loginInvalido = new Login("email_invalido.com", "123456@f");
+
+        // Act
+        Login loginAct = loginService.fazerLogin(loginInvalido);
+
+        //Assert
+        Assertions.assertNull(loginAct, "Deve retornar null");
+
+        verify(loginRepositorio, never()).fazerLogin(any(Login.class));
+
+    }
+
+    @Test
+    public  void realizarLoginComEmailInvalidoSemCom(){
+        //Arrange
+        Login loginInvalido = new Login("email_invalido@", "123456@f");
 
         // Act
         Login loginAct = loginService.fazerLogin(loginInvalido);
