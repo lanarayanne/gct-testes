@@ -36,27 +36,50 @@ public class LoginTest {
     public void realizarLoginComSucesso() {
         // Arrange
         Login login = new Login("usuario@usuario.com", "123456@Ff");
-        Usuario u = new Usuario("usuario@usuario.com");
+        Usuario usuario = new Usuario();
+        usuario.setEmail("usuario@usuario.com");
+        usuario.setSenha("123456@Ff");
 
         // Act
-        when(usuarioRepositorio.buscarPorEmail(login.getEmail())).thenReturn(u);
+        when(usuarioRepositorio.buscarPorEmail(login.getEmail())).thenReturn(usuario);
         loginService.fazerLogin(login);
 
         // Assert (Verificação)
         verify(loginRepositorio, times(1)).fazerLogin(login);
     }
 
-    /*TC02*/
+    /*TC002*/
     @Test
     public  void realizarLoginComEmailErrado(){
         //Arrange
-        Login loginInvalido = new Login("email@email.com", "123456Ff");
+        Login loginInvalido = new Login("email@email.com", "123456@Ff");
 
         // Act
         when(usuarioRepositorio.buscarPorEmail(loginInvalido.getEmail())).thenReturn(null);
 
         //Assert
         Assertions.assertThrows(NullPointerException.class, ()-> {
+            loginService.fazerLogin(loginInvalido);
+        });
+
+        verify(loginRepositorio, never()).fazerLogin(any(Login.class));
+
+    }
+
+    /*TC003*/
+    @Test
+    public  void realizarLoginComSenhaErrada(){
+        //Arrange
+        Login loginInvalido = new Login("email@email.com", "senhaErrada");
+        Usuario usuario = new Usuario();
+        usuario.setEmail("email@email.com");
+        usuario.setSenha("123456@Ff");
+
+        // Act
+        when(usuarioRepositorio.buscarPorEmail(loginInvalido.getEmail())).thenReturn(usuario);
+
+        //Assert
+        Assertions.assertThrows(IllegalArgumentException.class, ()-> {
             loginService.fazerLogin(loginInvalido);
         });
 

@@ -9,8 +9,9 @@ public class Usuario {
 
     }
 
-    public Usuario(String email){
+    public Usuario(String email, String senha){
         this.email = email;
+        this.senha = senha;
     }
 
     public String getEmail() {
