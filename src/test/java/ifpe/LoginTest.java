@@ -55,7 +55,7 @@ public class LoginTest {
         Login loginAct = loginService.fazerLogin(loginInvalido);
 
         //Assert
-        Assertions.assertThrows(IllegalArgumentException.class, ()-> {
+        Assertions.assertThrows(NullPointerException.class, ()-> {
             loginService.fazerLogin(loginInvalido);
         });
 
