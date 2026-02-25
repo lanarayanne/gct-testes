@@ -87,6 +87,27 @@ public class LoginTest {
 
     }
 
+    /*TC003*/
+    @Test
+    public  void realizarLoginComEmaileSenhaErrada(){
+        //Arrange
+        Login loginInvalido = new Login("emailErrado@email.com", "senhaErrada");
+        Usuario usuario = new Usuario();
+        usuario.setEmail("email@email.com");
+        usuario.setSenha("123456@Ff");
+
+        // Act
+        when(usuarioRepositorio.buscarPorEmail(loginInvalido.getEmail())).thenReturn(usuario);
+
+        //Assert
+        Assertions.assertThrows(NullPointerException.class, ()-> {
+            loginService.fazerLogin(loginInvalido);
+        });
+
+        verify(loginRepositorio, never()).fazerLogin(any(Login.class));
+
+    }
+
 //    @Test
 //    public  void realizarLoginComEmailInvalidoSemArroba(){
 //        //Arrange
