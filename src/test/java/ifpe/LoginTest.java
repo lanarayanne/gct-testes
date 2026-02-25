@@ -47,7 +47,7 @@ public class LoginTest {
 
         //Assert
         Assertions.assertNull(loginAct, "Deve retornar null");
-        verify(loginRepositorio, times(1)).fazerLogin(loginInvalido);
+
         verify(loginRepositorio, never()).fazerLogin(any(Login.class));
 
     }

@@ -11,6 +11,9 @@ public class LoginService {
     }
 
     public Login fazerLogin(Login login){
+        if (!login.getEmail().contains("@") || !login.getEmail().contains(".com")) {
+            return null;
+        }
         return this.loginRepositorio.fazerLogin(login);
     }
 }
