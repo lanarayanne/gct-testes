@@ -23,9 +23,15 @@ public class LoginService {
 
     public Login fazerLogin(Login login) {
         String email = login.getEmail();
+        String senha = login.getSenha();
+
 
         if(email == null || email.isEmpty()){
             throw new IllegalArgumentException("E-mail é obrigatório");
+        }
+
+        if(senha == null || senha.isEmpty()){
+            throw new IllegalArgumentException("Senha é obrigatório");
         }
 
         Usuario usuario = this.usuarioRepositorio.buscarPorEmail(email);
@@ -35,7 +41,7 @@ public class LoginService {
         }
 
         String senhaSalva = usuario.getSenha();
-        boolean verificarSenha = verificarSenha(senhaSalva, login.getSenha());
+        boolean verificarSenha = verificarSenha(senhaSalva, senha);
 
         if(!verificarSenha){
             throw new IllegalArgumentException ("Senha Inválida");

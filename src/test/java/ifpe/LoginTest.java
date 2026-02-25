@@ -122,6 +122,43 @@ public class LoginTest {
 
     }
 
+    /*TC005*/
+    @Test
+    public  void realizarLoginSenhaNull(){
+        //Arrange
+        Login loginInvalido = new Login("email@email.com", null);
+
+        // Act
+
+        //Assert
+        Assertions.assertThrows(IllegalArgumentException.class, ()-> {
+            loginService.fazerLogin(loginInvalido);
+        });
+
+        verify(loginRepositorio, never()).fazerLogin(any(Login.class));
+
+    }
+
+    /*TC005*/
+    @Test
+    public  void realizarLoginSemSenha(){
+        //Arrange
+        Login loginInvalido = new Login();
+        loginInvalido.setEmail("email@email.com");
+
+        // Act
+
+        //Assert
+        Assertions.assertThrows(IllegalArgumentException.class, ()-> {
+            loginService.fazerLogin(loginInvalido);
+        });
+
+        verify(loginRepositorio, never()).fazerLogin(any(Login.class));
+
+    }
+
+
+
 //    @Test
 //    public  void realizarLoginComEmailInvalidoSemArroba(){
 //        //Arrange
