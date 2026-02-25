@@ -35,7 +35,7 @@ public class LoginTest {
     @Test
     public void realizarLoginComSucesso() {
         // Arrange
-        Login login = new Login("usuario@usuario.com", "123456@Ff");
+        Login login = new Login("usuario@usuario.com", "Senha@123");
         Usuario usuario = new Usuario();
         usuario.setEmail("usuario@usuario.com");
         usuario.setSenha("123456@Ff");
@@ -52,7 +52,7 @@ public class LoginTest {
     @Test
     public  void realizarLoginComEmailErrado(){
         //Arrange
-        Login loginInvalido = new Login("email@email.com", "123456@Ff");
+        Login loginInvalido = new Login("email@email.com", "Senha@123");
 
         // Act
         when(usuarioRepositorio.buscarPorEmail(loginInvalido.getEmail())).thenReturn(null);
@@ -87,17 +87,16 @@ public class LoginTest {
 
     }
 
-    /*TC003*/
+    /*TC004*/
     @Test
-    public  void realizarLoginComEmaileSenhaErrada(){
+    public  void realizarLoginEmailNull(){
         //Arrange
-        Login loginInvalido = new Login("emailErrado@email.com", "senhaErrada");
+        Login loginInvalido = new Login(null, "Senha@123");
 
         // Act
-        when(usuarioRepositorio.buscarPorEmail(loginInvalido.getEmail())).thenReturn(null);
 
         //Assert
-        Assertions.assertThrows(NullPointerException.class, ()-> {
+        Assertions.assertThrows(IllegalArgumentException.class, ()-> {
             loginService.fazerLogin(loginInvalido);
         });
 

@@ -23,7 +23,13 @@ public class LoginService {
 
     public Login fazerLogin(Login login) {
         String email = login.getEmail();
+
+        if(email == null || email.isEmpty()){
+            throw new IllegalArgumentException("E-mail é obrigatório");
+        }
+
         Usuario usuario = this.usuarioRepositorio.buscarPorEmail(email);
+
         if(usuario == null){
             throw new NullPointerException ("Usuário não encontrado");
         }
