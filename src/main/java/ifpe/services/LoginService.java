@@ -25,6 +25,9 @@ public class LoginService {
         String email = login.getEmail();
         String senha = login.getSenha();
 
+        if((email == null || email.isEmpty())&&(senha == null || senha.isEmpty()) ){
+            throw new IllegalArgumentException("E-mail é obrigatório e Senha é obrigatório");
+        }
 
         if(email == null || email.isEmpty()){
             throw new IllegalArgumentException("E-mail é obrigatório");

@@ -122,7 +122,7 @@ public class LoginTest {
 
     }
 
-    /*TC005*/
+    /*TC006*/
     @Test
     public  void realizarLoginSenhaNull(){
         //Arrange
@@ -139,12 +139,46 @@ public class LoginTest {
 
     }
 
-    /*TC005*/
+    /*TC006*/
     @Test
     public  void realizarLoginSemSenha(){
         //Arrange
         Login loginInvalido = new Login();
         loginInvalido.setEmail("email@email.com");
+
+        // Act
+
+        //Assert
+        Assertions.assertThrows(IllegalArgumentException.class, ()-> {
+            loginService.fazerLogin(loginInvalido);
+        });
+
+        verify(loginRepositorio, never()).fazerLogin(any(Login.class));
+
+    }
+
+    /*TC007*/
+    @Test
+    public  void realizarLoginEmailESenhaNull(){
+        //Arrange
+        Login loginInvalido = new Login(null, null);
+
+        // Act
+
+        //Assert
+        Assertions.assertThrows(IllegalArgumentException.class, ()-> {
+            loginService.fazerLogin(loginInvalido);
+        });
+
+        verify(loginRepositorio, never()).fazerLogin(any(Login.class));
+
+    }
+
+    /*TC007*/
+    @Test
+    public  void realizarLoginSemEmailESenha(){
+        //Arrange
+        Login loginInvalido = new Login();
 
         // Act
 
