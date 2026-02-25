@@ -191,6 +191,24 @@ public class LoginTest {
 
     }
 
+    /*TC009*/
+    @Test
+    public  void realizarLoginUsuarioNaoCadastrado(){
+        //Arrange
+        Login loginInvalido = new Login("naocadastrado@email.com", "Senha@123");
+
+        // Act
+        when(usuarioRepositorio.buscarPorEmail(loginInvalido.getEmail())).thenReturn(null);
+
+        //Assert
+        Assertions.assertThrows(NullPointerException.class, ()-> {
+            loginService.fazerLogin(loginInvalido);
+        });
+
+        verify(loginRepositorio, never()).fazerLogin(any(Login.class));
+
+    }
+
 
 
 //    @Test
