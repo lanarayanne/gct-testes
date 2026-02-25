@@ -36,8 +36,10 @@ public class LoginTest {
     public void realizarLoginComSucesso() {
         // Arrange
         Login login = new Login("usuario@usuario.com", "123456@Ff");
+        Usuario u = new Usuario("usuario@usuario.com");
 
         // Act
+        when(usuarioRepositorio.buscarPorEmail(login.getEmail())).thenReturn(u);
         loginService.fazerLogin(login);
 
         // Assert (Verificação)
