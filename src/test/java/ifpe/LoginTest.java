@@ -38,7 +38,7 @@ public class LoginTest {
         Login login = new Login("usuario@usuario.com", "Senha@123");
         Usuario usuario = new Usuario();
         usuario.setEmail("usuario@usuario.com");
-        usuario.setSenha("123456@Ff");
+        usuario.setSenha("Senha@123");
 
         // Act
         when(usuarioRepositorio.buscarPorEmail(login.getEmail())).thenReturn(usuario);
@@ -73,7 +73,7 @@ public class LoginTest {
         Login loginInvalido = new Login("email@email.com", "senhaErrada");
         Usuario usuario = new Usuario();
         usuario.setEmail("email@email.com");
-        usuario.setSenha("123456@Ff");
+        usuario.setSenha("Senha@123");
 
         // Act
         when(usuarioRepositorio.buscarPorEmail(loginInvalido.getEmail())).thenReturn(usuario);
