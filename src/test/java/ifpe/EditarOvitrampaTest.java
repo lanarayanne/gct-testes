@@ -263,6 +263,23 @@ public class EditarOvitrampaTest {
 
     }
 
+    /*TC019*/
+    @Test
+    public void editarGrupoOvitrampaRemover(){
+        //Arrange
+        int id = 1;
+        String novoGrupo = null;
+
+        //Act
+        when(ovitrampaRepositorio.buscarPorId(id)).thenReturn(ovitrampa);
+        ovitrampaService.editarGrupo(id, novoGrupo);
+
+        //Assert
+        verify(ovitrampaRepositorio, times(1)).editarOvitrampa(ovitrampa);
+        Assertions.assertEquals(novoGrupo, ovitrampa.getGrupo());
+
+    }
+
 
 
 
