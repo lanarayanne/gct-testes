@@ -143,10 +143,27 @@ public class EditarOvitrampaTest {
 
     /*TC012*/
     @Test
-    public void editarLarvicidaSucesso(){
+    public void editarLarvicidaSucessoOE(){
         //Arrange
         int id = 1;
         Larvicida novoLarvicida = Larvicida.OLEO_ESSENCIAL;
+
+        //Act
+        when(ovitrampaRepositorio.buscarPorId(id)).thenReturn(ovitrampa);
+        ovitrampaService.editarLarvicida(id, novoLarvicida);
+
+        //Assert
+        verify(ovitrampaRepositorio, times(1)).editarOvitrampa(ovitrampa);
+        Assertions.assertEquals(novoLarvicida, ovitrampa.getLarvicida());
+
+    }
+
+    /*TC012*/
+    @Test
+    public void editarLarvicidaSucessoBTO(){
+        //Arrange
+        int id = 1;
+        Larvicida novoLarvicida = Larvicida.BTI;
 
         //Act
         when(ovitrampaRepositorio.buscarPorId(id)).thenReturn(ovitrampa);
