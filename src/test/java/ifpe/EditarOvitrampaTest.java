@@ -1,6 +1,7 @@
 package ifpe;
 
 import ifpe.entidades.Larvicida;
+import ifpe.entidades.Localizacao;
 import ifpe.entidades.Ovitrampa;
 import ifpe.repositorios.OvitrampaRepositorio;
 import ifpe.services.OvitrampaService;
@@ -25,9 +26,9 @@ public class EditarOvitrampaTest {
 
     @BeforeEach
     public void initTests() {
+        Localizacao localizacao = new Localizacao(-8.056, -34.915);
         this.ovitrampa = new Ovitrampa(
-                -8.056,
-                -34.915,
+                localizacao,
                 Larvicida.BTI,
                 "Cemitério da Várzea",
                 "Grupo 1",
@@ -47,7 +48,24 @@ public class EditarOvitrampaTest {
 
         //Assert
         verify(ovitrampaRepositorio, times(1)).editarOvitrampa(ovitrampa);
-        Assertions.assertEquals(novaLatitude, ovitrampa.getLatitude());
+        Assertions.assertEquals(novaLatitude, ovitrampa.getLocalizacao().getLatitude());
+
+    }
+
+    /*TC009*/
+    @Test
+    public void editarLongitudeOvitrampaSucesso(){
+        //Arrange
+        int id = 1;
+        Double novaLongitude = -35.914;
+
+        //Act
+        when(ovitrampaRepositorio.buscarPorId(id)).thenReturn(ovitrampa);
+        ovitrampaService.editarLongitude(id, novaLongitude);
+
+        //Assert
+        verify(ovitrampaRepositorio, times(1)).editarOvitrampa(ovitrampa);
+        Assertions.assertEquals(novaLongitude, ovitrampa.getLocalizacao().getLongitude());
 
     }
 }

@@ -4,8 +4,7 @@ import java.util.Date;
 
 public class Ovitrampa {
     private int id;
-    private Double latitude;
-    private Double longitude;
+    private Localizacao localizacao;
     private Larvicida larvicida;
     private String nome;
     private String grupo;
@@ -16,14 +15,12 @@ public class Ovitrampa {
 
     }
 
-    public Ovitrampa(Double latitude,
-                     Double longitude,
+    public Ovitrampa(Localizacao localizacao,
                      Larvicida larvicida,
                      String nome,
                      String grupo,
                      int id_usuario){
-        this.latitude = latitude;
-        this.longitude = longitude;
+        this.localizacao = localizacao;
         this.larvicida = larvicida;
         this.nome = nome;
         this.grupo = grupo;
@@ -31,12 +28,10 @@ public class Ovitrampa {
         this.dataCadastro = new Date();
     }
 
-    public Ovitrampa(Double latitude,
-                     Double longitude,
+    public Ovitrampa(Localizacao localizacao,
                      Larvicida larvicida,
                      int id_usuario){
-        this.latitude = latitude;
-        this.longitude = longitude;
+        this.localizacao = localizacao;
         this.larvicida = larvicida;
 
         this.id_usuario = id_usuario;
@@ -51,20 +46,12 @@ public class Ovitrampa {
         this.id = id;
     }
 
-    public Double getLatitude() {
-        return latitude;
+    public Localizacao getLocalizacao() {
+        return localizacao;
     }
 
-    public void setLatitude(Double latitude) {
-        this.latitude = latitude;
-    }
-
-    public Double getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(Double longitude) {
-        this.longitude = longitude;
+    public void setLocalizacao(Localizacao localizacao) {
+        this.localizacao = localizacao;
     }
 
     public Larvicida getLarvicida() {

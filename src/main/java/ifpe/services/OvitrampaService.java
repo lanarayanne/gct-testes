@@ -16,7 +16,15 @@ public class OvitrampaService {
 
     public void editarLatitude(int id, Double novaLatitude) {
         Ovitrampa ovitrampa = buscarOvitrampa(id);
-        ovitrampa.setLatitude(novaLatitude);
+
+        ovitrampa.getLocalizacao().setLatitude(novaLatitude);
+
+        this.ovitrampaRepositorio.editarOvitrampa(ovitrampa);
+    }
+
+    public void editarLongitude(int id, Double novaLongitude) {
+        Ovitrampa ovitrampa = buscarOvitrampa(id);
+        ovitrampa.getLocalizacao().setLongitude(novaLongitude);
 
         this.ovitrampaRepositorio.editarOvitrampa(ovitrampa);
     }
