@@ -15,6 +15,10 @@ public class OvitrampaService {
     }
 
     public void editarLatitude(int id, Double novaLatitude) {
+        if(novaLatitude>90 || novaLatitude<-90){
+            throw new IllegalArgumentException("O valor inserido não é localização");
+        }
+
         Ovitrampa ovitrampa = buscarOvitrampa(id);
 
         ovitrampa.getLocalizacao().setLatitude(novaLatitude);

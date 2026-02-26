@@ -68,4 +68,22 @@ public class EditarOvitrampaTest {
         Assertions.assertEquals(novaLongitude, ovitrampa.getLocalizacao().getLongitude());
 
     }
+
+    /*TC010*/
+    @Test
+    public void editarLatitudeOvitrampaComValorInvalido(){
+        //Arrange
+        int id = 1;
+        Double novaLatitude = -35914.0;
+
+        //Act
+
+        //Assert
+        Assertions.assertThrows(IllegalArgumentException.class, ()-> {
+            ovitrampaService.editarLatitude(id, novaLatitude);
+        });
+        Assertions.assertNotEquals(novaLatitude, ovitrampa.getLocalizacao().getLatitude());
+        verify(ovitrampaRepositorio, never()).editarOvitrampa(ovitrampa);
+
+    }
 }
