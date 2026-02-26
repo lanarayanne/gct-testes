@@ -1,5 +1,6 @@
 package ifpe.services;
 
+import ifpe.entidades.Larvicida;
 import ifpe.entidades.Ovitrampa;
 import ifpe.repositorios.OvitrampaRepositorio;
 
@@ -44,4 +45,13 @@ public class OvitrampaService {
 
         this.ovitrampaRepositorio.editarOvitrampa(ovitrampa);
     }
+
+    public void editarLarvicida(int id, Larvicida novoLarvicida)  {
+
+        Ovitrampa ovitrampa = buscarOvitrampa(id);
+        ovitrampa.setLarvicida(novoLarvicida);
+        this.ovitrampaRepositorio.editarOvitrampa(ovitrampa);
+    }
+
+
 }

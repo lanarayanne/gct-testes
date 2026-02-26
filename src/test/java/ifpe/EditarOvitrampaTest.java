@@ -123,7 +123,7 @@ public class EditarOvitrampaTest {
 
     }
 
-    /*TC010*/
+    /*TC011*/
     @Test
     public void editarLongitudeOvitrampaRemover(){
         //Arrange
@@ -138,6 +138,23 @@ public class EditarOvitrampaTest {
         });
         Assertions.assertNotEquals(novaLongitude, ovitrampa.getLocalizacao().getLongitude());
         verify(ovitrampaRepositorio, never()).editarOvitrampa(ovitrampa);
+
+    }
+
+    /*TC012*/
+    @Test
+    public void editarLarvicidaSucesso(){
+        //Arrange
+        int id = 1;
+        Larvicida novoLarvicida = Larvicida.OLEO_ESSENCIAL;
+
+        //Act
+        when(ovitrampaRepositorio.buscarPorId(id)).thenReturn(ovitrampa);
+        ovitrampaService.editarLarvicida(id, novoLarvicida);
+
+        //Assert
+        verify(ovitrampaRepositorio, times(1)).editarOvitrampa(ovitrampa);
+        Assertions.assertEquals(novoLarvicida, ovitrampa.getLarvicida());
 
     }
 
