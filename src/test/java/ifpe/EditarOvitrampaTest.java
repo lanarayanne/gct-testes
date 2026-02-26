@@ -105,7 +105,7 @@ public class EditarOvitrampaTest {
 
     }
 
-    /*TC010*/
+    /*TC011*/
     @Test
     public void editarLatitudeOvitrampaRemover(){
         //Arrange
@@ -122,6 +122,26 @@ public class EditarOvitrampaTest {
         verify(ovitrampaRepositorio, never()).editarOvitrampa(ovitrampa);
 
     }
+
+    /*TC010*/
+    @Test
+    public void editarLongitudeOvitrampaRemover(){
+        //Arrange
+        int id = 1;
+        Double novaLongitude = null;
+
+        //Act
+
+        //Assert
+        Assertions.assertThrows(IllegalArgumentException.class, ()-> {
+            ovitrampaService.editarLongitude(id, novaLongitude);
+        });
+        Assertions.assertNotEquals(novaLongitude, ovitrampa.getLocalizacao().getLongitude());
+        verify(ovitrampaRepositorio, never()).editarOvitrampa(ovitrampa);
+
+    }
+
+
 
 
 }

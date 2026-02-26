@@ -30,7 +30,12 @@ public class OvitrampaService {
     }
 
     public void editarLongitude(int id, Double novaLongitude) {
-        if(novaLongitude>90 || novaLongitude<-90){
+
+        if(novaLongitude == null){
+            throw new IllegalArgumentException("A latitude é obrigatória");
+        }
+
+        if(novaLongitude>180 || novaLongitude<-180){
             throw new IllegalArgumentException("O valor inserido não é localização");
         }
 
