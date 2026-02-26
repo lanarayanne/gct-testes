@@ -176,12 +176,30 @@ public class EditarOvitrampaTest {
         Assertions.assertEquals(novoLarvicida, ovitrampa.getLarvicida());
 
     }
-
+    /*TC014*/
     @Test
     public void editarLarvicidaInvalido(){
         //Arrange
         int id = 1;
         String novoLarvicida = "Outro";
+
+        //Act
+
+        //Assert
+        Assertions.assertThrows(IllegalArgumentException.class, ()-> {
+            ovitrampaService.editarLarvicida(id, novoLarvicida);
+        });
+        Assertions.assertNotEquals(novoLarvicida, ovitrampa.getLarvicida());
+        verify(ovitrampaRepositorio, never()).editarOvitrampa(ovitrampa);
+
+    }
+
+    /*TC015*/
+    @Test
+    public void editarLarvicidaRemover(){
+        //Arrange
+        int id = 1;
+        String novoLarvicida = null;
 
         //Act
 

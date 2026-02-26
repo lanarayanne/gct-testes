@@ -54,6 +54,11 @@ public class OvitrampaService {
     }
 
     public void editarLarvicida(int id, String novoLarvicida)  {
+
+        if (novoLarvicida == null || novoLarvicida.isEmpty()){
+            throw new IllegalArgumentException("Larvicida é obrigatório");
+        }
+
         Larvicida larvicida;
 
         if (novoLarvicida.equalsIgnoreCase("Óleo Essencial")){
