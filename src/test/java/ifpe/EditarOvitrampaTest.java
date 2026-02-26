@@ -246,6 +246,23 @@ public class EditarOvitrampaTest {
 
     }
 
+    /*TC018*/
+    @Test
+    public void editarGrupoOvitrampa(){
+        //Arrange
+        int id = 1;
+        String novoGrupo = "Praça da Várzea";
+
+        //Act
+        when(ovitrampaRepositorio.buscarPorId(id)).thenReturn(ovitrampa);
+        ovitrampaService.editarGrupo(id, novoGrupo);
+
+        //Assert
+        verify(ovitrampaRepositorio, times(1)).editarOvitrampa(ovitrampa);
+        Assertions.assertEquals(novoGrupo, ovitrampa.getGrupo());
+
+    }
+
 
 
 

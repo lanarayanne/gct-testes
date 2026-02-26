@@ -84,6 +84,12 @@ public class OvitrampaService {
         this.ovitrampaRepositorio.editarOvitrampa(ovitrampa);
     }
 
+    public void editarGrupo(int id, String novoGrupo){
+        Ovitrampa ovitrampa = buscarOvitrampa(id);
+        ovitrampa.setGrupo(novoGrupo);
+        this.ovitrampaRepositorio.editarOvitrampa(ovitrampa);
+    }
+
 
 
 
