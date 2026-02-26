@@ -27,6 +27,10 @@ public class OvitrampaService {
     }
 
     public void editarLongitude(int id, Double novaLongitude) {
+        if(novaLongitude>90 || novaLongitude<-90){
+            throw new IllegalArgumentException("O valor inserido não é localização");
+        }
+
         Ovitrampa ovitrampa = buscarOvitrampa(id);
         ovitrampa.getLocalizacao().setLongitude(novaLongitude);
 
