@@ -212,6 +212,23 @@ public class EditarOvitrampaTest {
 
     }
 
+    /*TC016*/
+    @Test
+    public void editarNomeOvitrampa(){
+        //Arrange
+        int id = 1;
+        String novoNome = "Ponto B";
+
+        //Act
+        when(ovitrampaRepositorio.buscarPorId(id)).thenReturn(ovitrampa);
+        ovitrampaService.editarNome(id, novoNome);
+
+        //Assert
+        verify(ovitrampaRepositorio, times(1)).editarOvitrampa(ovitrampa);
+        Assertions.assertEquals(novoNome, ovitrampa.getNome());
+
+    }
+
 
 
 

@@ -78,5 +78,13 @@ public class OvitrampaService {
         this.ovitrampaRepositorio.editarOvitrampa(ovitrampa);
     }
 
+    public void editarNome(int id, String novoNome){
+        Ovitrampa ovitrampa = buscarOvitrampa(id);
+        ovitrampa.setNome(novoNome);
+        this.ovitrampaRepositorio.editarOvitrampa(ovitrampa);
+    }
+
+
+
 
 }
