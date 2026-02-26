@@ -147,6 +147,7 @@ public class EditarOvitrampaTest {
         //Arrange
         int id = 1;
         Larvicida novoLarvicida = Larvicida.OLEO_ESSENCIAL;
+        this.ovitrampa.setLarvicida(Larvicida.BTI);
 
         //Act
         when(ovitrampaRepositorio.buscarPorId(id)).thenReturn(ovitrampa);
@@ -158,12 +159,13 @@ public class EditarOvitrampaTest {
 
     }
 
-    /*TC012*/
+    /*TC013*/
     @Test
-    public void editarLarvicidaSucessoBTO(){
+    public void editarLarvicidaSucessoBTI(){
         //Arrange
         int id = 1;
         Larvicida novoLarvicida = Larvicida.BTI;
+        this.ovitrampa.setLarvicida(Larvicida.OLEO_ESSENCIAL);
 
         //Act
         when(ovitrampaRepositorio.buscarPorId(id)).thenReturn(ovitrampa);
@@ -172,6 +174,23 @@ public class EditarOvitrampaTest {
         //Assert
         verify(ovitrampaRepositorio, times(1)).editarOvitrampa(ovitrampa);
         Assertions.assertEquals(novoLarvicida, ovitrampa.getLarvicida());
+
+    }
+
+    @Test
+    public void editarLarvicidaInvalido(){
+        //Arrange
+        int id = 1;
+        String novoLarvicida = "Outro";
+
+        //Act
+
+        //Assert
+        Assertions.assertThrows(IllegalArgumentException.class, ()-> {
+            ovitrampaService.editarLarvicida(id, novoLarvicida);
+        });
+        Assertions.assertNotEquals(novoLarvicida, ovitrampa.getLarvicida());
+        verify(ovitrampaRepositorio, never()).editarOvitrampa(ovitrampa);
 
     }
 
