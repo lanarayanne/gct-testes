@@ -90,6 +90,14 @@ public class OvitrampaService {
         this.ovitrampaRepositorio.editarOvitrampa(ovitrampa);
     }
 
+    public Ovitrampa buscarPorNome(String nome){
+        return this.ovitrampaRepositorio.buscarPorNome(nome);
+    }
+
+    public Ovitrampa buscarPorLarvicida(String larvicida){
+        return this.ovitrampaRepositorio.buscarPorLarvicida(larvicida);
+    }
+
 
 
 
