@@ -46,28 +46,13 @@ public class OvitrampaService {
         this.ovitrampaRepositorio.editarOvitrampa(ovitrampa);
     }
 
-    public void editarLarvicida(int id, Larvicida novoLarvicida)  {
-
-        Ovitrampa ovitrampa = buscarOvitrampa(id);
-        ovitrampa.setLarvicida(novoLarvicida);
-        this.ovitrampaRepositorio.editarOvitrampa(ovitrampa);
-    }
-
     public void editarLarvicida(int id, String novoLarvicida)  {
 
         if (novoLarvicida == null || novoLarvicida.isEmpty()){
             throw new IllegalArgumentException("Larvicida é obrigatório");
         }
 
-        Larvicida larvicida;
-
-        if (novoLarvicida.equalsIgnoreCase("Óleo Essencial")){
-            larvicida = Larvicida.OLEO_ESSENCIAL;
-        } else if (novoLarvicida.equalsIgnoreCase("BTI")){
-            larvicida = Larvicida.BTI;
-        } else {
-            larvicida = Larvicida.VAZIO;
-        }
+        Larvicida larvicida = Larvicida.toLarvicida(novoLarvicida);
 
         if (larvicida.equals(Larvicida.VAZIO)){
             throw new IllegalArgumentException ("Substância Inválida");

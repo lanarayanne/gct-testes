@@ -146,16 +146,17 @@ public class EditarOvitrampaTest {
     public void editarLarvicidaSucessoOE(){
         //Arrange
         int id = 1;
-        Larvicida novoLarvicida = Larvicida.OLEO_ESSENCIAL;
+        String novoLarvicidaStr = "Óleo Essencial";
+        Larvicida novoLarvicidaEnum = Larvicida.toLarvicida(novoLarvicidaStr);
         this.ovitrampa.setLarvicida(Larvicida.BTI);
 
         //Act
         when(ovitrampaRepositorio.buscarPorId(id)).thenReturn(ovitrampa);
-        ovitrampaService.editarLarvicida(id, novoLarvicida);
+        ovitrampaService.editarLarvicida(id, novoLarvicidaStr);
 
         //Assert
         verify(ovitrampaRepositorio, times(1)).editarOvitrampa(ovitrampa);
-        Assertions.assertEquals(novoLarvicida, ovitrampa.getLarvicida());
+        Assertions.assertEquals(novoLarvicidaEnum, ovitrampa.getLarvicida());
 
     }
 
@@ -164,16 +165,17 @@ public class EditarOvitrampaTest {
     public void editarLarvicidaSucessoBTI(){
         //Arrange
         int id = 1;
-        Larvicida novoLarvicida = Larvicida.BTI;
+        String novoLarvicidaStr = "BTI";
+        Larvicida novoLarvicidaEnum = Larvicida.toLarvicida(novoLarvicidaStr);
         this.ovitrampa.setLarvicida(Larvicida.OLEO_ESSENCIAL);
 
         //Act
         when(ovitrampaRepositorio.buscarPorId(id)).thenReturn(ovitrampa);
-        ovitrampaService.editarLarvicida(id, novoLarvicida);
+        ovitrampaService.editarLarvicida(id, novoLarvicidaStr);
 
         //Assert
         verify(ovitrampaRepositorio, times(1)).editarOvitrampa(ovitrampa);
-        Assertions.assertEquals(novoLarvicida, ovitrampa.getLarvicida());
+        Assertions.assertEquals(novoLarvicidaEnum, ovitrampa.getLarvicida());
 
     }
     /*TC014*/
