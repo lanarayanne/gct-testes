@@ -69,4 +69,21 @@ public class BuscarOvitrampaTest {
         verify(ovitrampaRepositorio, times(1)).buscarPorLarvicida(larvicida);
     }
 
+    /*TC021*/
+    @Test
+    public void buscarOvitrampaSubstanciaBTI(){
+        //Arrange
+        String larvicida = "BTI";
+        ovitrampa.setLarvicida(Larvicida.BTI);
+
+        //Act
+        when(ovitrampaRepositorio.buscarPorLarvicida(larvicida)).thenReturn(ovitrampa);
+        Ovitrampa resultadoBusca = ovitrampaService.buscarPorLarvicida(larvicida);
+
+        //Assert
+        Assertions.assertNotNull(resultadoBusca);
+        Assertions.assertSame(resultadoBusca, ovitrampa);
+        verify(ovitrampaRepositorio, times(1)).buscarPorLarvicida(larvicida);
+    }
+
 }
