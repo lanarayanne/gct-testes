@@ -7,5 +7,5 @@ public interface OvitrampaRepositorio {
     void editarOvitrampa(Ovitrampa ovitrampa);
     Ovitrampa buscarPorNome(String nome);
     Ovitrampa buscarPorLarvicida(String larvicida);
-
+    Ovitrampa buscarPorGrupo(String grupo);
 }

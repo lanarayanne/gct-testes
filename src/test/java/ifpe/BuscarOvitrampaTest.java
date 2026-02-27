@@ -86,4 +86,20 @@ public class BuscarOvitrampaTest {
         verify(ovitrampaRepositorio, times(1)).buscarPorLarvicida(larvicida);
     }
 
+    /*TC020*/
+    @Test
+    public void buscarOvitrampaGrupoExistente(){
+        //Arrange
+        String grupo = "Grupo 1";
+
+        //Act
+        when(ovitrampaRepositorio.buscarPorGrupo(grupo)).thenReturn(ovitrampa);
+        Ovitrampa resultadoBusca = ovitrampaService.buscarPorGrupo(grupo);
+
+        //Assert
+        Assertions.assertNotNull(resultadoBusca);
+        Assertions.assertSame(resultadoBusca, ovitrampa);
+        verify(ovitrampaRepositorio, times(1)).buscarPorGrupo(grupo);
+    }
+
 }

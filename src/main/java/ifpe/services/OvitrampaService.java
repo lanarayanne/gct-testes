@@ -98,6 +98,10 @@ public class OvitrampaService {
         return this.ovitrampaRepositorio.buscarPorLarvicida(larvicida);
     }
 
+    public Ovitrampa buscarPorGrupo(String grupo){
+        return this.ovitrampaRepositorio.buscarPorGrupo(grupo);
+    }
+
 
 
 
