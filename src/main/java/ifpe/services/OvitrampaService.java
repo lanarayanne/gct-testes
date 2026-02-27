@@ -91,11 +91,29 @@ public class OvitrampaService {
     }
 
     public Ovitrampa buscarPorNome(String nome){
-        return this.ovitrampaRepositorio.buscarPorNome(nome);
+        Ovitrampa resultadoBusca = this.ovitrampaRepositorio.buscarPorNome(nome);
+        if(resultadoBusca == null) {
+            throw new NullPointerException("Ovitrampa não encontrada");
+        }
+        return resultadoBusca;
+
     }
 
-    public Ovitrampa buscarPorLarvicida(String larvicida){
-        return this.ovitrampaRepositorio.buscarPorLarvicida(larvicida);
+    public Ovitrampa buscarPorLarvicida(String larvicidaStr){
+
+        Larvicida larvicida = Larvicida.toLarvicida(larvicidaStr);
+
+        if (larvicida == Larvicida.VAZIO) {
+            throw new IllegalArgumentException("Substância Inválida");
+        }
+
+        Ovitrampa resultadoBusca = this.ovitrampaRepositorio.buscarPorLarvicida(larvicida);
+
+        if (resultadoBusca == null) {
+            throw new NullPointerException("Ovitrampa não encontrada");
+        }
+
+        return resultadoBusca;
     }
 
     public Ovitrampa buscarPorGrupo(String grupo){

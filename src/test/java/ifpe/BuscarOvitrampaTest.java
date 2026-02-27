@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.internal.matchers.Null;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.mockito.Mockito.*;
@@ -56,37 +57,39 @@ public class BuscarOvitrampaTest {
     @Test
     public void buscarOvitrampaSubstanciaOE(){
         //Arrange
-        String larvicida = "Óleo Essencial";
-        ovitrampa.setLarvicida(Larvicida.OLEO_ESSENCIAL);
+        String larvicidaStr = "Óleo Essencial";
+        Larvicida larvicidaEnum = Larvicida.OLEO_ESSENCIAL;
+        ovitrampa.setLarvicida(larvicidaEnum);
 
         //Act
-        when(ovitrampaRepositorio.buscarPorLarvicida(larvicida)).thenReturn(ovitrampa);
-        Ovitrampa resultadoBusca = ovitrampaService.buscarPorLarvicida(larvicida);
+        when(ovitrampaRepositorio.buscarPorLarvicida(larvicidaEnum)).thenReturn(ovitrampa);
+        Ovitrampa resultadoBusca = ovitrampaService.buscarPorLarvicida(larvicidaStr);
 
         //Assert
         Assertions.assertNotNull(resultadoBusca);
         Assertions.assertSame(resultadoBusca, ovitrampa);
-        verify(ovitrampaRepositorio, times(1)).buscarPorLarvicida(larvicida);
+        verify(ovitrampaRepositorio, times(1)).buscarPorLarvicida(larvicidaEnum);
     }
 
     /*TC021*/
     @Test
     public void buscarOvitrampaSubstanciaBTI(){
         //Arrange
-        String larvicida = "BTI";
-        ovitrampa.setLarvicida(Larvicida.BTI);
+        String larvicidaStr = "BTI";
+        Larvicida larvicidaEnum = Larvicida.BTI;
+        ovitrampa.setLarvicida(larvicidaEnum);
 
         //Act
-        when(ovitrampaRepositorio.buscarPorLarvicida(larvicida)).thenReturn(ovitrampa);
-        Ovitrampa resultadoBusca = ovitrampaService.buscarPorLarvicida(larvicida);
+        when(ovitrampaRepositorio.buscarPorLarvicida(larvicidaEnum)).thenReturn(ovitrampa);
+        Ovitrampa resultadoBusca = ovitrampaService.buscarPorLarvicida(larvicidaStr);
 
         //Assert
         Assertions.assertNotNull(resultadoBusca);
         Assertions.assertSame(resultadoBusca, ovitrampa);
-        verify(ovitrampaRepositorio, times(1)).buscarPorLarvicida(larvicida);
+        verify(ovitrampaRepositorio, times(1)).buscarPorLarvicida(larvicidaEnum);
     }
 
-    /*TC020*/
+    /*TC022*/
     @Test
     public void buscarOvitrampaGrupoExistente(){
         //Arrange
@@ -101,5 +104,40 @@ public class BuscarOvitrampaTest {
         Assertions.assertSame(resultadoBusca, ovitrampa);
         verify(ovitrampaRepositorio, times(1)).buscarPorGrupo(grupo);
     }
+
+    /*TC020*/
+    @Test
+    public void buscarOvitrampaNomeInexistente(){
+        //Arrange
+        String nome = "teste_55dd5z";
+
+        //Act
+        when(ovitrampaRepositorio.buscarPorNome(nome)).thenReturn(null);
+
+        //Assert
+        Assertions.assertThrows(NullPointerException.class, ()-> {
+            ovitrampaService.buscarPorNome(nome);
+        });
+        verify(ovitrampaRepositorio, times(1)).buscarPorNome(nome);
+    }
+
+    /*TC020*/
+    @Test
+    public void buscarOvitrampaSubstanciaInexistente(){
+        //Arrange
+        String larvicidaStr = "substancia1";
+        Larvicida larvicidaEnum = Larvicida.toLarvicida(larvicidaStr);
+
+        //Act
+        when(ovitrampaRepositorio.buscarPorLarvicida(larvicidaEnum)).thenReturn(null);
+
+        //Assert
+        Assertions.assertThrows(IllegalArgumentException.class, ()-> {
+            ovitrampaService.buscarPorLarvicida(larvicidaStr);
+        });
+        verify(ovitrampaRepositorio, times(1)).buscarPorLarvicida(larvicidaEnum);
+    }
+
+
 
 }
