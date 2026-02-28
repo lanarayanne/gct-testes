@@ -19,8 +19,12 @@ public class UsuarioService {
         return this.usuarioRepositorio.buscarPorId(id);
     }
 
-    public void redefinirSenha(int usuarioId, String novaSenha, String repetirSenha){
+    public void redefinirSenha(int usuarioId, String senhaAtual, String novaSenha, String repetirSenha){
         Usuario usuario = this.usuarioRepositorio.buscarPorId(usuarioId);
+        if (!usuario.getSenha().equals(senhaAtual)) {
+            throw new IllegalArgumentException("Senha Atual não correspondente, Tente novamente");
+        }
+
         this.usuarioRepositorio.redefinirSenha(novaSenha);
     }
 

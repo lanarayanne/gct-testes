@@ -6,6 +6,7 @@ import ifpe.repositorios.LoginRepositorio;
 import ifpe.repositorios.UsuarioRepositorio;
 import ifpe.services.LoginService;
 import ifpe.services.UsuarioService;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -34,14 +35,34 @@ public class UsarioTest {
     @Test
     public void RedefinirSenhaSucesso() {
         // Arrange
+        String senhaAtual = "Senha@1234";
         String novaSenha = "Senha@4567";
         String repetirNovaSenha = "Senha@4567";
 
         // Act
         when(usuarioRepositorio.buscarPorId(usuario.getId())).thenReturn(usuario);
-        usuarioService.redefinirSenha(usuario.getId(), novaSenha, repetirNovaSenha);
+        usuarioService.redefinirSenha(usuario.getId(), senhaAtual, novaSenha, repetirNovaSenha);
 
         // Assert (Verificação)
         verify(usuarioRepositorio, times(1)).redefinirSenha(novaSenha);
+    }
+
+    /*TC038*/
+    @Test
+    public void RedefinirSenhaAtualIncorreta() {
+        // Arrange
+        String senhaAtual = "Senhaincorreta";
+        String novaSenha = "Senha@4567";
+        String repetirNovaSenha = "Senha@4567";
+
+        // Act
+        when(usuarioRepositorio.buscarPorId(usuario.getId())).thenReturn(usuario);
+
+
+        // Assert (Verificação)
+        Assertions.assertThrows(IllegalArgumentException.class, ()-> {
+            usuarioService.redefinirSenha(usuario.getId(), senhaAtual, novaSenha, repetirNovaSenha);
+        });
+        verify(usuarioRepositorio, never()).redefinirSenha(novaSenha);
     }
 }
