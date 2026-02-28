@@ -17,6 +17,8 @@ public class LeituraService {
     public void editarData(int id, Date novaData){
         Leitura leitura = this.leituraRepositorio.buscarPorId(id);
 
+        if (novaData == null) novaData = new Date();
+
         leitura.setData(novaData);
         this.leituraRepositorio.editarLeitura(leitura);
     }

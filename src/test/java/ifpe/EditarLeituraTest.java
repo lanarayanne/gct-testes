@@ -65,4 +65,20 @@ public class EditarLeituraTest {
         Assertions.assertEquals(novaData, leitura.getData());
 
     }
+
+    @Test
+    public void EditarDataLeituraVazia(){
+        //Arrange
+        Date novaData = null;
+
+        //Act
+        when(leituraRepositorio.buscarPorId(leitura.getId())).thenReturn(leitura);
+        leituraService.editarData(leitura.getId(), novaData);
+
+        //Assert
+        verify(leituraRepositorio, times(1)).editarLeitura(leitura);
+        Assertions.assertNotNull(leitura.getData());
+
+    }
+
 }
