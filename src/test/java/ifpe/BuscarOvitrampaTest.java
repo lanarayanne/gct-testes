@@ -185,6 +185,22 @@ public class BuscarOvitrampaTest {
         verify(ovitrampaRepositorio, never()).buscarPorNome(nome);
     }
 
+    /*TC027*/
+    @Test
+    public void buscarOvitrampaLarvicidaVazio(){
+        //Arrange
+        String larvicidaStr = null;
+        Larvicida larvicidaEnum = Larvicida.toLarvicida(larvicidaStr);
+
+        //Act
+
+        //Assert
+        Assertions.assertThrows(IllegalArgumentException.class, ()-> {
+            ovitrampaService.buscarPorLarvicida(larvicidaStr);
+        });
+        verify(ovitrampaRepositorio, never()).buscarPorLarvicida(larvicidaEnum);
+    }
+
 
 
 

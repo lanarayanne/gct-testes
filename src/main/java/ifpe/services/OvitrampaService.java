@@ -86,7 +86,7 @@ public class OvitrampaService {
     }
 
     public Ovitrampa buscarPorLarvicida(String larvicidaStr){
-
+        if (larvicidaStr == null) throw new IllegalArgumentException("Campo vazio, insira um texto");
         Larvicida larvicida = Larvicida.toLarvicida(larvicidaStr);
 
         if (larvicida == Larvicida.VAZIO) {
