@@ -113,6 +113,7 @@ public class OvitrampaService {
         if (ovitrampa.getLocalizacao() == null) throw new IllegalArgumentException("Informe as coordenadas geográficas");
         if (ovitrampa.getLocalizacao().getLongitude() == null) throw new IllegalArgumentException("Informe a longitude");
         if (ovitrampa.getLocalizacao().getLatitude() == null) throw new IllegalArgumentException("Informe as coordenadas geográficas");
+        if (ovitrampa.getLarvicida() == null) throw new IllegalArgumentException("Informe as coordenadas geográficas");
 
         this.ovitrampaRepositorio.cadastrar(ovitrampa, userId);
     }
