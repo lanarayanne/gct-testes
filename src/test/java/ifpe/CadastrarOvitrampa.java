@@ -100,6 +100,27 @@ public class CadastrarOvitrampa {
 
     }
 
+    /*TC030*/
+    @Test
+    public void CadastrarOvitrampaSemLatitude(){
+        //Arrange
+        Ovitrampa ovitrampa = new Ovitrampa();
+        Localizacao localizacao = new Localizacao(null, -34.915);
+        ovitrampa.setLocalizacao(localizacao);
+        ovitrampa.setLarvicida(Larvicida.BTI);
+        ovitrampa.setNome("Cemitério da Várzea");
+        ovitrampa.setGrupo("Grupo 1");
+
+        //Act
+
+        //Assert
+        Assertions.assertThrows(IllegalArgumentException.class, ()-> {
+            ovitrampaService.cadastrar(ovitrampa, this.usuario.getId());
+        });
+        verify(ovitrampaRepositorio, never()).cadastrar(ovitrampa, this.usuario.getId());
+
+    }
+
 
 
 
