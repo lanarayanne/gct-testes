@@ -103,6 +103,7 @@ public class OvitrampaService {
     }
 
     public Ovitrampa buscarPorGrupo(String grupo){
+        if (grupo == null) throw new IllegalArgumentException("Campo vazio, insira um texto");
         Ovitrampa resultado = this.ovitrampaRepositorio.buscarPorGrupo(grupo);
         if (resultado == null) throw new NullPointerException("Grupo não encontrado");
         return resultado;

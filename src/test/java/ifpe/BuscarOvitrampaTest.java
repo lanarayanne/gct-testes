@@ -201,6 +201,21 @@ public class BuscarOvitrampaTest {
         verify(ovitrampaRepositorio, never()).buscarPorLarvicida(larvicidaEnum);
     }
 
+    /*TC027*/
+    @Test
+    public void buscarOvitrampaGrupoVazio(){
+        //Arrange
+        String grupo = null;
+
+        //Act
+
+        //Assert
+        Assertions.assertThrows(IllegalArgumentException.class, ()-> {
+            ovitrampaService.buscarPorGrupo(grupo);
+        });
+        verify(ovitrampaRepositorio, never()).buscarPorGrupo(grupo);
+    }
+
 
 
 
