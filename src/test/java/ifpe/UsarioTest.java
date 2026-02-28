@@ -65,4 +65,22 @@ public class UsarioTest {
         });
         verify(usuarioRepositorio, never()).redefinirSenha(novaSenha);
     }
+
+    /*TC038*/
+    @Test
+    public void RedefinirSenhaSemSenhaAtual() {
+        // Arrange
+        String senhaAtual = null;
+        String novaSenha = "Senha@4567";
+        String repetirNovaSenha = "Senha@4567";
+
+        // Act
+
+
+        // Assert (Verificação)
+        Assertions.assertThrows(IllegalArgumentException.class, ()-> {
+            usuarioService.redefinirSenha(usuario.getId(), senhaAtual, novaSenha, repetirNovaSenha);
+        });
+        verify(usuarioRepositorio, never()).redefinirSenha(novaSenha);
+    }
 }
