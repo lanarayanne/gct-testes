@@ -170,6 +170,21 @@ public class BuscarOvitrampaTest {
         verify(ovitrampaRepositorio, times(1)).buscarPorGrupo(grupo);
     }
 
+    /*TC027*/
+    @Test
+    public void buscarOvitrampaNomeVazio(){
+        //Arrange
+        String nome = null;
+
+        //Act
+
+        //Assert
+        Assertions.assertThrows(IllegalArgumentException.class, ()-> {
+            ovitrampaService.buscarPorNome(nome);
+        });
+        verify(ovitrampaRepositorio, never()).buscarPorNome(nome);
+    }
+
 
 
 

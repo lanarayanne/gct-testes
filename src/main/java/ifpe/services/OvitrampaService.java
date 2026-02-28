@@ -76,6 +76,7 @@ public class OvitrampaService {
     }
 
     public Ovitrampa buscarPorNome(String nome){
+        if (nome == null) throw new IllegalArgumentException("Campo vazio, insira um texto");
         Ovitrampa resultadoBusca = this.ovitrampaRepositorio.buscarPorNome(nome);
         if(resultadoBusca == null) {
             throw new NullPointerException("Ovitrampa não encontrada");
