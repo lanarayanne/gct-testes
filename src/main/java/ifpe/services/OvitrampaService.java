@@ -110,6 +110,7 @@ public class OvitrampaService {
     }
 
     public void cadastrar(Ovitrampa ovitrampa, int userId){
+        if (ovitrampa.getLocalizacao() == null) throw new IllegalArgumentException("Informe as coordenadas geográficas");
         this.ovitrampaRepositorio.cadastrar(ovitrampa, userId);
     }
 

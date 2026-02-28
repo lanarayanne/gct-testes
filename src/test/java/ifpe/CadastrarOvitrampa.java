@@ -39,7 +39,7 @@ public class CadastrarOvitrampa {
         usuario.setId(1);
     }
 
-    /*TC009*/
+    /*TC028*/
     @Test
     public void CadastrarOvitrampaSucesso(){
         //Arrange
@@ -56,6 +56,26 @@ public class CadastrarOvitrampa {
 
         //Assert
         verify(ovitrampaRepositorio, times(1)).cadastrar(ovitrampa, this.usuario.getId());
+
+    }
+
+    /*TC028*/
+    @Test
+    public void CadastrarOvitrampaSemLocalizacao(){
+        //Arrange
+        Ovitrampa ovitrampa = new Ovitrampa();
+        ovitrampa.setLocalizacao(null);
+        ovitrampa.setLarvicida(Larvicida.BTI);
+        ovitrampa.setNome("Cemitério da Várzea");
+        ovitrampa.setGrupo("Grupo 1");
+
+        //Act
+
+        //Assert
+        Assertions.assertThrows(IllegalArgumentException.class, ()-> {
+            ovitrampaService.cadastrar(ovitrampa, this.usuario.getId());
+        });
+        verify(ovitrampaRepositorio, never()).cadastrar(ovitrampa, this.usuario.getId());
 
     }
 
