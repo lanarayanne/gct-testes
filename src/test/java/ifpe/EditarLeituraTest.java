@@ -50,4 +50,19 @@ public class EditarLeituraTest {
         Assertions.assertEquals(novaData, leitura.getData());
 
     }
+
+    @Test
+    public void EditarDataLeituraDuplicada(){
+        //Arrange
+        Date novaData = new Date("December 17, 1995 03:24:00");
+
+        //Act
+        when(leituraRepositorio.buscarPorId(leitura.getId())).thenReturn(leitura);
+        leituraService.editarData(leitura.getId(), novaData);
+
+        //Assert
+        verify(leituraRepositorio, times(1)).editarLeitura(leitura);
+        Assertions.assertEquals(novaData, leitura.getData());
+
+    }
 }
