@@ -129,13 +129,12 @@ public class BuscarOvitrampaTest {
         Larvicida larvicidaEnum = Larvicida.toLarvicida(larvicidaStr);
 
         //Act
-        when(ovitrampaRepositorio.buscarPorLarvicida(larvicidaEnum)).thenReturn(null);
 
         //Assert
         Assertions.assertThrows(IllegalArgumentException.class, ()-> {
             ovitrampaService.buscarPorLarvicida(larvicidaStr);
         });
-        verify(ovitrampaRepositorio, times(1)).buscarPorLarvicida(larvicidaEnum);
+        verify(ovitrampaRepositorio, never()).buscarPorLarvicida(larvicidaEnum);
     }
 
 
