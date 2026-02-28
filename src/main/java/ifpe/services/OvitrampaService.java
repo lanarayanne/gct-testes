@@ -15,13 +15,20 @@ public class OvitrampaService {
         return this.ovitrampaRepositorio.buscarPorId(id);
     }
 
+    public boolean validarLatitude(Double latitude){
+        return latitude <= 90 && latitude >= -90;
+    }
+
+    public boolean validarLongitude(Double longitude){
+        return longitude <= 180 && longitude >= -180;
+    }
+
     public void editarLatitude(int id, Double novaLatitude) {
         if(novaLatitude == null){
             throw new IllegalArgumentException("A latitude é obrigatória");
         }
-        if(novaLatitude>90 || novaLatitude<-90){
-            throw new IllegalArgumentException("O valor inserido não é localização");
-        }
+
+        if(!validarLatitude(novaLatitude)) throw new IllegalArgumentException("O valor inserido não é localização");
 
         Ovitrampa ovitrampa = buscarOvitrampa(id);
 
@@ -36,9 +43,8 @@ public class OvitrampaService {
             throw new IllegalArgumentException("A latitude é obrigatória");
         }
 
-        if(novaLongitude>180 || novaLongitude<-180){
-            throw new IllegalArgumentException("O valor inserido não é localização");
-        }
+        if(!validarLongitude(novaLongitude)) throw new IllegalArgumentException("O valor inserido não é localização");
+
 
         Ovitrampa ovitrampa = buscarOvitrampa(id);
         ovitrampa.getLocalizacao().setLongitude(novaLongitude);
@@ -112,8 +118,9 @@ public class OvitrampaService {
     public void cadastrar(Ovitrampa ovitrampa, int userId){
         if (ovitrampa.getLocalizacao() == null) throw new IllegalArgumentException("Informe as coordenadas geográficas");
         if (ovitrampa.getLocalizacao().getLongitude() == null) throw new IllegalArgumentException("Informe a longitude");
-        if (ovitrampa.getLocalizacao().getLatitude() == null) throw new IllegalArgumentException("Informe as coordenadas geográficas");
-        if (ovitrampa.getLarvicida() == null) throw new IllegalArgumentException("Informe as coordenadas geográficas");
+        if (ovitrampa.getLocalizacao().getLatitude() == null) throw new IllegalArgumentException("Informe a latitude");
+        if (ovitrampa.getLarvicida() == null) throw new IllegalArgumentException("Selecione uma substância");
+        if (!validarLatitude(ovitrampa.getLocalizacao().getLatitude())) throw new IllegalArgumentException("Coordenada inválida");
 
         this.ovitrampaRepositorio.cadastrar(ovitrampa, userId);
     }
