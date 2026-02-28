@@ -102,7 +102,9 @@ public class OvitrampaService {
     }
 
     public Ovitrampa buscarPorGrupo(String grupo){
-        return this.ovitrampaRepositorio.buscarPorGrupo(grupo);
+        Ovitrampa resultado = this.ovitrampaRepositorio.buscarPorGrupo(grupo);
+        if (resultado == null) throw new NullPointerException("Grupo não encontrado");
+        return resultado;
     }
 
 

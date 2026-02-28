@@ -105,7 +105,7 @@ public class BuscarOvitrampaTest {
         verify(ovitrampaRepositorio, times(1)).buscarPorGrupo(grupo);
     }
 
-    /*TC020*/
+    /*TC023*/
     @Test
     public void buscarOvitrampaNomeInexistente(){
         //Arrange
@@ -121,7 +121,7 @@ public class BuscarOvitrampaTest {
         verify(ovitrampaRepositorio, times(1)).buscarPorNome(nome);
     }
 
-    /*TC020*/
+    /*TC024*/
     @Test
     public void buscarOvitrampaSubstanciaInexistente(){
         //Arrange
@@ -136,6 +136,24 @@ public class BuscarOvitrampaTest {
         });
         verify(ovitrampaRepositorio, never()).buscarPorLarvicida(larvicidaEnum);
     }
+
+    /*TC022*/
+    @Test
+    public void buscarOvitrampaGrupoInexistente(){
+        //Arrange
+        String grupo = "Grupo 2";
+
+        //Act
+        when(ovitrampaRepositorio.buscarPorGrupo(grupo)).thenReturn(null);
+
+        //Assert
+        Assertions.assertThrows(NullPointerException.class, ()-> {
+            ovitrampaService.buscarPorGrupo(grupo);
+        });
+        verify(ovitrampaRepositorio, times(1)).buscarPorGrupo(grupo);
+    }
+
+
 
 
 
