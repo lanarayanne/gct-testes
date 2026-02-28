@@ -21,6 +21,8 @@ public class UsuarioService {
 
     public void redefinirSenha(int usuarioId, String senhaAtual, String novaSenha, String repetirSenha){
         if(senhaAtual == null) throw new IllegalArgumentException("Senha Atual não correspondente, Tente novamente");
+        if(novaSenha == null) throw new IllegalArgumentException("Informe a senha");
+
         if(novaSenha.length()<8) throw new IllegalArgumentException("Número de caracteres inválido!");
 
         String regexComplexa = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*]).*$";

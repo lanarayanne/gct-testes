@@ -119,4 +119,40 @@ public class UsarioTest {
         });
         verify(usuarioRepositorio, never()).redefinirSenha(novaSenha);
     }
+
+    /*TC042*/
+    @Test
+    public void RedefinirSenhaSemCaractereEspecial() {
+        // Arrange
+        String senhaAtual = "Senha@1234";
+        String novaSenha = "Senha456";
+        String repetirNovaSenha = "Senha456";
+
+        // Act
+
+
+        // Assert (Verificação)
+        Assertions.assertThrows(IllegalArgumentException.class, ()-> {
+            usuarioService.redefinirSenha(usuario.getId(), senhaAtual, novaSenha, repetirNovaSenha);
+        });
+        verify(usuarioRepositorio, never()).redefinirSenha(novaSenha);
+    }
+
+    /*TC041*/
+    @Test
+    public void RedefinirSenhaSemNovaSenha() {
+        // Arrange
+        String senhaAtual = "Senha@1234";
+        String novaSenha = null;
+        String repetirNovaSenha = "Senha@456";
+
+        // Act
+
+
+        // Assert (Verificação)
+        Assertions.assertThrows(IllegalArgumentException.class, ()-> {
+            usuarioService.redefinirSenha(usuario.getId(), senhaAtual, novaSenha, repetirNovaSenha);
+        });
+        verify(usuarioRepositorio, never()).redefinirSenha(novaSenha);
+    }
 }
