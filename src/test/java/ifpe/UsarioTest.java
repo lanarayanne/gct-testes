@@ -86,6 +86,24 @@ public class UsarioTest {
 
     /*TC040*/
     @Test
+    public void RedefinirSenhaCaracteresInsuficientes() {
+        // Arrange
+        String senhaAtual = "Senha@1234";
+        String novaSenha = "S@45";
+        String repetirNovaSenha = "S@45";
+
+        // Act
+
+
+        // Assert (Verificação)
+        Assertions.assertThrows(IllegalArgumentException.class, ()-> {
+            usuarioService.redefinirSenha(usuario.getId(), senhaAtual, novaSenha, repetirNovaSenha);
+        });
+        verify(usuarioRepositorio, never()).redefinirSenha(novaSenha);
+    }
+
+    /*TC040*/
+    @Test
     public void RedefinirSenhaSemMaiuscula() {
         // Arrange
         String senhaAtual = "Senha@1234";
