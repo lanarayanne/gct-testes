@@ -123,6 +123,23 @@ public class BuscarOvitrampaTest {
 
     /*TC024*/
     @Test
+    public void buscarOvitrampaSubstanciaInvalida(){
+        //Arrange
+        String larvicidaStr = "bti";
+        Larvicida larvicidaEnum = Larvicida.toLarvicida(larvicidaStr);
+
+        //Act
+        when(ovitrampaRepositorio.buscarPorLarvicida(larvicidaEnum)).thenReturn(null);
+
+        //Assert
+        Assertions.assertThrows(NullPointerException.class, () -> {
+            ovitrampaService.buscarPorLarvicida(larvicidaStr);
+        });
+        verify(ovitrampaRepositorio, times(1)).buscarPorLarvicida(larvicidaEnum);
+    }
+
+    /*TC024*/
+    @Test
     public void buscarOvitrampaSubstanciaInexistente(){
         //Arrange
         String larvicidaStr = "substancia1";
