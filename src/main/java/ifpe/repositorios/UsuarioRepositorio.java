@@ -5,4 +5,6 @@ import ifpe.entidades.Usuario;
 
 public interface UsuarioRepositorio {
     Usuario buscarPorEmail(String email);
+    Usuario buscarPorId(int id);
+    void redefinirSenha(String novaSenha);
 }
