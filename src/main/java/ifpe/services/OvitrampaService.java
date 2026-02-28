@@ -109,6 +109,10 @@ public class OvitrampaService {
         return resultado;
     }
 
+    public void cadastrar(Ovitrampa ovitrampa, int userId){
+        this.ovitrampaRepositorio.cadastrar(ovitrampa, userId);
+    }
+
 
 
 

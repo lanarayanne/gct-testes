@@ -9,4 +9,5 @@ public interface OvitrampaRepositorio {
     Ovitrampa buscarPorNome(String nome);
     Ovitrampa buscarPorLarvicida(Larvicida larvicida);
     Ovitrampa buscarPorGrupo(String grupo);
+    void cadastrar(Ovitrampa ovitrampa, int userId);
 }
