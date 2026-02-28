@@ -22,8 +22,11 @@ public class UsuarioService {
     public void redefinirSenha(int usuarioId, String senhaAtual, String novaSenha, String repetirSenha){
         if(senhaAtual == null) throw new IllegalArgumentException("Senha Atual não correspondente, Tente novamente");
         if(novaSenha == null) throw new IllegalArgumentException("Informe a senha");
-
         if(novaSenha.length()<8) throw new IllegalArgumentException("Número de caracteres inválido!");
+
+        if(repetirSenha == null) throw new IllegalArgumentException("As senhas não coincidem");
+        if(!novaSenha.equals(repetirSenha)) throw new IllegalArgumentException("As senhas não coincidem");
+
 
         String regexComplexa = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*]).*$";
         if (!novaSenha.matches(regexComplexa)) {
@@ -34,12 +37,6 @@ public class UsuarioService {
         if (!usuario.getSenha().equals(senhaAtual)) {
             throw new IllegalArgumentException("Senha Atual não correspondente, Tente novamente");
         }
-
-
-
-
-
-
 
         this.usuarioRepositorio.redefinirSenha(novaSenha);
     }

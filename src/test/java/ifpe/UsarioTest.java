@@ -138,13 +138,49 @@ public class UsarioTest {
         verify(usuarioRepositorio, never()).redefinirSenha(novaSenha);
     }
 
-    /*TC041*/
+    /*TC043*/
     @Test
     public void RedefinirSenhaSemNovaSenha() {
         // Arrange
         String senhaAtual = "Senha@1234";
         String novaSenha = null;
         String repetirNovaSenha = "Senha@456";
+
+        // Act
+
+
+        // Assert (Verificação)
+        Assertions.assertThrows(IllegalArgumentException.class, ()-> {
+            usuarioService.redefinirSenha(usuario.getId(), senhaAtual, novaSenha, repetirNovaSenha);
+        });
+        verify(usuarioRepositorio, never()).redefinirSenha(novaSenha);
+    }
+
+    /*TC044*/
+    @Test
+    public void RedefinirSenhaSemRepetirSenha() {
+        // Arrange
+        String senhaAtual = "Senha@1234";
+        String novaSenha = "Senha@456";
+        String repetirNovaSenha = null;
+
+        // Act
+
+
+        // Assert (Verificação)
+        Assertions.assertThrows(IllegalArgumentException.class, ()-> {
+            usuarioService.redefinirSenha(usuario.getId(), senhaAtual, novaSenha, repetirNovaSenha);
+        });
+        verify(usuarioRepositorio, never()).redefinirSenha(novaSenha);
+    }
+
+    /*TC044*/
+    @Test
+    public void RedefinirSenhaRepetirSenhaInvalido() {
+        // Arrange
+        String senhaAtual = "Senha@1234";
+        String novaSenha = "Senha@456";
+        String repetirNovaSenha = "Senha@4567";
 
         // Act
 
