@@ -86,11 +86,11 @@ public class UsarioTest {
 
     /*TC040*/
     @Test
-    public void RedefinirSenhaCaracteresInsuficientes() {
+    public void RedefinirSenhaSemMaiuscula() {
         // Arrange
         String senhaAtual = "Senha@1234";
-        String novaSenha = "S@45";
-        String repetirNovaSenha = "S@45";
+        String novaSenha = "senha@456";
+        String repetirNovaSenha = "senha@456";
 
         // Act
 
