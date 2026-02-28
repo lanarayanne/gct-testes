@@ -120,7 +120,8 @@ public class OvitrampaService {
         if (ovitrampa.getLocalizacao().getLongitude() == null) throw new IllegalArgumentException("Informe a longitude");
         if (ovitrampa.getLocalizacao().getLatitude() == null) throw new IllegalArgumentException("Informe a latitude");
         if (ovitrampa.getLarvicida() == null) throw new IllegalArgumentException("Selecione uma substância");
-        if (!validarLatitude(ovitrampa.getLocalizacao().getLatitude())) throw new IllegalArgumentException("Coordenada inválida");
+        if (!validarLatitude(ovitrampa.getLocalizacao().getLatitude())) throw new IllegalArgumentException("Latitude inválida");
+        if (!validarLongitude(ovitrampa.getLocalizacao().getLongitude())) throw new IllegalArgumentException("Longitude inválida");
 
         this.ovitrampaRepositorio.cadastrar(ovitrampa, userId);
     }

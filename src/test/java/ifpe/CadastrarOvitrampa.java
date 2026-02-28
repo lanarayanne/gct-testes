@@ -121,6 +121,7 @@ public class CadastrarOvitrampa {
 
     }
 
+    /*TC031*/
     @Test
     public void CadastrarOvitrampaSemSubstancia(){
         //Arrange
@@ -140,12 +141,33 @@ public class CadastrarOvitrampa {
         verify(ovitrampaRepositorio, never()).cadastrar(ovitrampa, this.usuario.getId());
 
     }
-
+    /*TC032*/
     @Test
     public void CadastrarOvitrampaLatitudeInvalido(){
         //Arrange
         Ovitrampa ovitrampa = new Ovitrampa();
         Localizacao localizacao = new Localizacao(-800.056, -34.915);
+        ovitrampa.setLocalizacao(localizacao);
+        ovitrampa.setLarvicida(Larvicida.BTI);
+        ovitrampa.setNome("Cemitério da Várzea");
+        ovitrampa.setGrupo("Grupo 1");
+
+        //Act
+
+        //Assert
+        Assertions.assertThrows(IllegalArgumentException.class, ()-> {
+            ovitrampaService.cadastrar(ovitrampa, this.usuario.getId());
+        });
+        verify(ovitrampaRepositorio, never()).cadastrar(ovitrampa, this.usuario.getId());
+
+    }
+
+    /*TC032*/
+    @Test
+    public void CadastrarOvitrampaLongitudeInvalido(){
+        //Arrange
+        Ovitrampa ovitrampa = new Ovitrampa();
+        Localizacao localizacao = new Localizacao(-8.056, -340.915);
         ovitrampa.setLocalizacao(localizacao);
         ovitrampa.setLarvicida(Larvicida.BTI);
         ovitrampa.setNome("Cemitério da Várzea");
