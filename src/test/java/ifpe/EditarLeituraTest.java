@@ -111,4 +111,19 @@ public class EditarLeituraTest {
 
     }
 
+    @Test
+    public void EditarQuantidadeSucesso(){
+        //Arrange
+        int novaQuantidade = 200;
+
+        //Act
+        when(leituraRepositorio.buscarPorId(leitura.getId())).thenReturn(leitura);
+        leituraService.editarQuantidade(leitura.getId(), novaQuantidade);
+
+        //Assert
+        verify(leituraRepositorio, times(1)).editarLeitura(leitura);
+        Assertions.assertEquals(novaQuantidade, leitura.getQuantidadeOvos());
+
+    }
+
 }
