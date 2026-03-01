@@ -96,4 +96,19 @@ public class EditarLeituraTest {
 
     }
 
+    @Test
+    public void EditarQuantidadeNegativa(){
+        //Arrange
+        int novaQuantidade = -10;
+
+        //Act
+
+        //Assert
+        Assertions.assertThrows(IllegalArgumentException.class, ()-> {
+            leituraService.editarQuantidade(leitura.getId(), novaQuantidade);
+        });
+        verify(leituraRepositorio, never()).editarLeitura(leitura);
+
+    }
+
 }

@@ -15,17 +15,27 @@ public class LeituraService {
     }
 
     public void editarData(int id, Date novaData){
-        Leitura leitura = this.leituraRepositorio.buscarPorId(id);
-
         Date hoje = new Date();
-
         if (novaData == null) novaData = hoje;
 
         if (novaData.after(hoje)) {
             throw new IllegalArgumentException("A data da leitura não pode ser futura");
         }
 
+        Leitura leitura = this.leituraRepositorio.buscarPorId(id);
+
         leitura.setData(novaData);
         this.leituraRepositorio.editarLeitura(leitura);
     }
+
+    public void editarQuantidade(int id, int novaQuantidade){
+        if (novaQuantidade < 0) throw new IllegalArgumentException("Dados de quantidade inválidos");
+        Leitura leitura = this.leituraRepositorio.buscarPorId(id);
+        leitura.setQuantidadeOvos(novaQuantidade);
+        this.leituraRepositorio.editarLeitura(leitura);
+    }
+
+
+
+
 }
