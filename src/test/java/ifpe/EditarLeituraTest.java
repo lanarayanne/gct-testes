@@ -81,4 +81,19 @@ public class EditarLeituraTest {
 
     }
 
+    @Test
+    public void EditarDataLeituraFutura(){
+        //Arrange
+        Date novaData = new Date("December 17, 2027 03:24:00");
+
+        //Act
+
+        //Assert
+        Assertions.assertThrows(IllegalArgumentException.class, ()-> {
+            leituraService.editarData(leitura.getId(), novaData);
+        });
+        verify(leituraRepositorio, never()).editarLeitura(leitura);
+
+    }
+
 }

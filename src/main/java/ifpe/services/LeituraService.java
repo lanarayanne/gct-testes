@@ -17,7 +17,13 @@ public class LeituraService {
     public void editarData(int id, Date novaData){
         Leitura leitura = this.leituraRepositorio.buscarPorId(id);
 
-        if (novaData == null) novaData = new Date();
+        Date hoje = new Date();
+
+        if (novaData == null) novaData = hoje;
+
+        if (novaData.after(hoje)) {
+            throw new IllegalArgumentException("A data da leitura não pode ser futura");
+        }
 
         leitura.setData(novaData);
         this.leituraRepositorio.editarLeitura(leitura);
