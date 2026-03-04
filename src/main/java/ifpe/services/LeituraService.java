@@ -28,7 +28,8 @@ public class LeituraService {
         this.leituraRepositorio.editarLeitura(leitura);
     }
 
-    public void editarQuantidade(int id, int novaQuantidade){
+    public void editarQuantidade(int id, Integer novaQuantidade){
+        if (novaQuantidade == null) throw new IllegalArgumentException("Dados de quantidade inválidos");
         if (novaQuantidade < 0) throw new IllegalArgumentException("Dados de quantidade inválidos");
         Leitura leitura = this.leituraRepositorio.buscarPorId(id);
         leitura.setQuantidadeOvos(novaQuantidade);

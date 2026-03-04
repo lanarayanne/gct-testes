@@ -125,5 +125,19 @@ public class EditarLeituraTest {
         Assertions.assertEquals(novaQuantidade, leitura.getQuantidadeOvos());
 
     }
+    @Test
+    public void EditarQuantidadeVazia(){
+        //Arrange
+        Integer novaQuantidade = null;
+
+        //Act
+
+        //Assert
+        Assertions.assertThrows(IllegalArgumentException.class, ()-> {
+            leituraService.editarQuantidade(leitura.getId(), novaQuantidade);
+        });
+        verify(leituraRepositorio, never()).editarLeitura(leitura);
+
+    }
 
 }
