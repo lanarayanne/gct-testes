@@ -58,7 +58,7 @@ public class LoginTest {
         when(usuarioRepositorio.buscarPorEmail(loginInvalido.getEmail())).thenReturn(null);
 
         //Assert
-        Assertions.assertThrows(NullPointerException.class, ()-> {
+        Assertions.assertThrows(IllegalArgumentException.class, ()-> {
             loginService.fazerLogin(loginInvalido);
         });
 
@@ -201,7 +201,7 @@ public class LoginTest {
         when(usuarioRepositorio.buscarPorEmail(loginInvalido.getEmail())).thenReturn(null);
 
         //Assert
-        Assertions.assertThrows(NullPointerException.class, ()-> {
+        Assertions.assertThrows(IllegalArgumentException.class, ()-> {
             loginService.fazerLogin(loginInvalido);
         });
 

@@ -85,7 +85,7 @@ public class OvitrampaService {
         if (nome == null) throw new IllegalArgumentException("Campo vazio, insira um texto");
         Ovitrampa resultadoBusca = this.ovitrampaRepositorio.buscarPorNome(nome);
         if(resultadoBusca == null) {
-            throw new NullPointerException("Ovitrampa não encontrada");
+            throw new IllegalArgumentException("Ovitrampa não encontrada");
         }
         return resultadoBusca;
 
@@ -102,7 +102,7 @@ public class OvitrampaService {
         Ovitrampa resultadoBusca = this.ovitrampaRepositorio.buscarPorLarvicida(larvicida);
 
         if (resultadoBusca == null) {
-            throw new NullPointerException("Ovitrampa não encontrada");
+            throw new IllegalArgumentException("Ovitrampa não encontrada");
         }
 
         return resultadoBusca;
@@ -111,7 +111,7 @@ public class OvitrampaService {
     public Ovitrampa buscarPorGrupo(String grupo){
         if (grupo == null) throw new IllegalArgumentException("Campo vazio, insira um texto");
         Ovitrampa resultado = this.ovitrampaRepositorio.buscarPorGrupo(grupo);
-        if (resultado == null) throw new NullPointerException("Grupo não encontrado");
+        if (resultado == null) throw new IllegalArgumentException("Grupo não encontrado");
         return resultado;
     }
 

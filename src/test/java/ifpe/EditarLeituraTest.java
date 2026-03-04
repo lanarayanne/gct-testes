@@ -1,6 +1,7 @@
 package ifpe;
 
 import ifpe.entidades.Leitura;
+import ifpe.entidades.Ovitrampa;
 import ifpe.entidades.Usuario;
 import ifpe.repositorios.LeituraRepositorio;
 import ifpe.services.LeituraService;
@@ -13,7 +14,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import static org.mockito.Mockito.*;
 
@@ -25,8 +28,10 @@ public class EditarLeituraTest {
     @InjectMocks
     private LeituraService leituraService;
 
+    List<Leitura> leituras = new ArrayList<>();
     Leitura leitura;
     Usuario usuario;
+    Ovitrampa ovitrampa;
 
     @BeforeEach
     public void initTestes(){
@@ -34,6 +39,10 @@ public class EditarLeituraTest {
         leitura.setId(1);
         this.usuario = new Usuario();
         usuario.setId(1);
+        this.ovitrampa = new Ovitrampa();
+        ovitrampa.setId(1);
+
+        leituras.add(leitura);
     }
 
     @Test
@@ -139,5 +148,6 @@ public class EditarLeituraTest {
         verify(leituraRepositorio, never()).editarLeitura(leitura);
 
     }
+
 
 }

@@ -1,4 +1,5 @@
 package ifpe.entidades;
+import java.util.Objects;
 
 import java.util.Date;
 
@@ -93,4 +94,25 @@ public class Ovitrampa {
     public void setDataCadastro(Date dataCadastro) {
         this.dataCadastro = dataCadastro;
     }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass())
+            return false;
+
+        Ovitrampa other = (Ovitrampa) obj;
+
+        return id == other.id &&
+                id_usuario == other.id_usuario &&
+                Objects.equals(nome, other.nome) &&
+                Objects.equals(grupo, other.grupo);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nome, grupo, id_usuario);
+    }
+
 }

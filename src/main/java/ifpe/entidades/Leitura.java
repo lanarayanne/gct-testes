@@ -7,6 +7,7 @@ public class Leitura {
     private int quantidadeOvos;
     private Date data;
     private int usuarioId;
+    private int ovitrampaId;
 
     public Leitura(){
         this.data = new Date();
@@ -15,6 +16,14 @@ public class Leitura {
 
     public Leitura(int quantidadeOvos){
         this.data = new Date();
+    }
+
+    public int getOvitrampaId() {
+        return ovitrampaId;
+    }
+
+    public void setOvitrampaId(int ovitrampaId) {
+        this.ovitrampaId = ovitrampaId;
     }
 
     public int getId() {

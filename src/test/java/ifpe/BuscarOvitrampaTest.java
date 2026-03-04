@@ -115,7 +115,7 @@ public class BuscarOvitrampaTest {
         when(ovitrampaRepositorio.buscarPorNome(nome)).thenReturn(null);
 
         //Assert
-        Assertions.assertThrows(NullPointerException.class, ()-> {
+        Assertions.assertThrows(IllegalArgumentException.class, ()-> {
             ovitrampaService.buscarPorNome(nome);
         });
         verify(ovitrampaRepositorio, times(1)).buscarPorNome(nome);
@@ -132,7 +132,7 @@ public class BuscarOvitrampaTest {
         when(ovitrampaRepositorio.buscarPorLarvicida(larvicidaEnum)).thenReturn(null);
 
         //Assert
-        Assertions.assertThrows(NullPointerException.class, () -> {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
             ovitrampaService.buscarPorLarvicida(larvicidaStr);
         });
         verify(ovitrampaRepositorio, times(1)).buscarPorLarvicida(larvicidaEnum);
@@ -164,7 +164,7 @@ public class BuscarOvitrampaTest {
         when(ovitrampaRepositorio.buscarPorGrupo(grupo)).thenReturn(null);
 
         //Assert
-        Assertions.assertThrows(NullPointerException.class, ()-> {
+        Assertions.assertThrows(IllegalArgumentException.class, ()-> {
             ovitrampaService.buscarPorGrupo(grupo);
         });
         verify(ovitrampaRepositorio, times(1)).buscarPorGrupo(grupo);

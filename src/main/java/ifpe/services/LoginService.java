@@ -25,10 +25,6 @@ public class LoginService {
         String email = login.getEmail();
         String senha = login.getSenha();
 
-        if((email == null || email.isEmpty())&&(senha == null || senha.isEmpty()) ){
-            throw new IllegalArgumentException("E-mail é obrigatório e Senha é obrigatório");
-        }
-
         if(email == null || email.isEmpty()){
             throw new IllegalArgumentException("E-mail é obrigatório");
         }
@@ -40,7 +36,7 @@ public class LoginService {
         Usuario usuario = this.usuarioRepositorio.buscarPorEmail(email);
 
         if(usuario == null){
-            throw new NullPointerException ("Usuário não encontrado");
+            throw new IllegalArgumentException ("Usuário não encontrado"); //Illegal...
         }
 
         String senhaSalva = usuario.getSenha();
